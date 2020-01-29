@@ -1,0 +1,1 @@
+Creating a functional calculator using html, css, and javascript
