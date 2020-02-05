@@ -1,0 +1,134 @@
+button {
+    font-size: 25;
+}
+
+#container {
+    display: grid;
+    border: 1px solid lightgray;
+    height: 500px;
+    width: 500px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 400px;
+    grid-template-areas: 
+        "display"
+        "keys";    
+    
+}
+
+.displayContainer {
+    display: grid;
+    grid-template-rows: 30px 70px;
+    grid-template-areas: 
+    "top"
+    "bottom";
+    grid-area: display;
+    border: 1px solid black;
+    text-align: right;
+    
+}
+
+.display {
+    grid-area: bottom;
+    text-align: right;
+    padding: 10px 5px;
+    font-size: 40;
+    overflow: hidden;
+}
+
+.topDisplay {
+    grid-area: top;
+    text-align: right;
+    font-size: 20;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.calcKeys {
+    display: grid;
+    grid-area: keys;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+        "seven eight nine clear backspace"
+        "four five six multiply divide"
+        "one two three add subtract"
+        "zero zero zero dot equals";
+
+}
+
+
+
+
+
+/* set button positions */
+#numOne {
+    grid-area: one;
+}
+
+#numTwo {
+    grid-area: two;
+}
+
+#numThree {
+    grid-area: three;
+}
+
+#numFour {
+    grid-area: four;
+}
+
+#numFive {
+    grid-area: five;
+}
+
+#numSix {
+    grid-area: six;
+}
+
+#numSeven {
+    grid-area: seven;
+}
+
+#numEight {
+    grid-area: eight;
+}
+
+#numNine {
+    grid-area: nine;
+}
+
+#numZero {
+    grid-area: zero;
+}
+
+#backspace {
+    grid-area: backspace;
+}
+
+#add {
+    grid-area: add;
+}
+
+#subtract {
+    grid-area: subtract;
+}
+
+#multiply {
+    grid-area: multiply;
+}
+
+#divide {
+    grid-area: divide;
+}
+
+#clear {
+    grid-area: clear;
+}
+
+#equals {
+    grid-area: equals;
+}
+
+#decimal {
+    grid-area: dot;
+}
