@@ -1,7 +1,5 @@
 function add(a, b) {
-    //console.log(a+b);
     return parseFloat(a)+parseFloat(b);
-    
 }
 
 function subtract(a, b) {
@@ -30,7 +28,7 @@ function operate(a, operator, b) {
     else if (operator === '/') {
         result = divide(a,b);
     }
-    return result;
+    return result.toFixed(2);
 }
 
 function collapseArray(array) {
@@ -39,6 +37,7 @@ function collapseArray(array) {
 
         array = [operate(firstNum, operator, secondNum), ...tempArray];
     }
+    //console.log(array);
     return array;
 }
 
@@ -61,8 +60,9 @@ function handleButtonPress(event) {
     
 
     if (/([0-9])/g.test(event.target.value) && lastEventTarget !== '=') {
-        console.log(lastEventTarget);
+        //console.log(lastEventTarget);
         display.textContent = display.textContent + event.target.value;
+        lastEventTarget = event.target.value;
                         
     }
     
@@ -80,34 +80,82 @@ function handleButtonPress(event) {
         //topInput.push(event.target.value);
         console.log(userInput);
         //topDisplay.textContent = topInput.join('');
-        display.textContent = '';           
+        display.textContent = '';
+        lastEventTarget = '';
+                   
         
     }
 
     else if (/([\+\-\*\/])/.test(event.target.value) && userInput.length > 1) {
-        userInput.push(display.textContent);
-        //topDisplay.textContent = topInput.join('');
-        userInput = collapseArray(userInput);
-        display.textContent = userInput;
-        userInput.push(event.target.value);
         
-        display.textContent = '';    
+                
+        if (display.textContent === '') {
+            //console.log(userInput);
+            userInput.pop();
+            userInput.push(event.target.value);
+            lastEventTarget = '';
+            //console.log(userInput);
+            //console.log("working");
+        }
+        else {
+        
+            userInput.push(display.textContent);
+            console.log(userInput);
+            //topDisplay.textContent = topInput.join('');
+            userInput = collapseArray(userInput);
+            console.log(userInput);
+            display.textContent = userInput;
+            userInput.push(event.target.value);
+            lastEventTarget = '';
+            display.textContent = '';
+        }    
     }
 
     else if (event.target.value === '=') {
-        userInput.push(display.textContent);
-        //topInput.push(display.textContent);
-        //console.log(topInput);
-        console.log(userInput);
-        userInput = collapseArray(userInput);
-        console.log(userInput);
-        //topDisplay.textContent = topInput.join('');
-        display.textContent = userInput;
-        userInput = [];
-        lastEventTarget = '=';
-        console.log(lastEventTarget);
         
+        if (/([0-9])/g.test(display.textContent)) {
+
+            userInput.push(display.textContent);
+            //topInput.push(display.textContent);
+            //console.log(topInput);
+            console.log(userInput);
+            userInput = collapseArray(userInput);
+            console.log(userInput);
+            //topDisplay.textContent = topInput.join('');
+            display.textContent = userInput;
+            userInput = [];
+            lastEventTarget = '=';
+            console.log(lastEventTarget);
+        }
+        else if (!/([0-9])/g.test(display.textContent)) {
+            alert('Press a number, not an operator!');
+        }
+
+    }
+
+    else if (event.target.value === '.') {
+        if (display.textContent === '') {
+            display.textContent = '0.';
+        }
+        else if (display.textContent.includes('.')) {
+            alert("Only 1 decimal please!")
+
+        }
+        else {
+            display.textContent = display.textContent + event.target.value;
+        }
+        //console.log("decimal key");
+    }
+
+    else if (event.target.value === 'delete') {
+        let splitDisplay = display.textContent;
+        //console.log("delete button");
+        let tempArray = splitDisplay.split('');
+        tempArray.pop();
+        display.textContent = tempArray.join('');
+        //console.log(display.textContent);
         
+          
     }
 
     else if (event.target.value === 'clear') {

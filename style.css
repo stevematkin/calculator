@@ -1,10 +1,16 @@
 button {
     font-size: 25;
+    margin: 2px;
+    border-radius: 10px;
+}
+
+button:focus {
+    outline: hidden;
 }
 
 #container {
     display: grid;
-    border: 1px solid lightgray;
+    border: 1px solid black;
     height: 500px;
     width: 500px;
     grid-template-columns: 1fr;
@@ -22,7 +28,7 @@ button {
     "top"
     "bottom";
     grid-area: display;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     text-align: right;
     
 }
@@ -54,6 +60,15 @@ button {
         "one two three add subtract"
         "zero zero zero dot equals";
 
+}
+
+.numKey {
+
+
+}
+
+.opKey {
+    background-color: red;
 }
 
 
