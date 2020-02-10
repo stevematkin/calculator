@@ -1,3 +1,4 @@
+//Operate functions
 function add(a, b) {
     return parseFloat(a)+parseFloat(b);
 }
@@ -30,7 +31,7 @@ function operate(a, operator, b) {
     }
     return result.toFixed(2);
 }
-
+//collapse array down to single number when stringing operators together
 function collapseArray(array) {
     while (array.length > 1) {
         const [firstNum, operator, secondNum, ...tempArray] = array;
@@ -44,23 +45,24 @@ function collapseArray(array) {
 //nums  /([0-9])/g
 //operators   /([\+\-\*\/])/;
 
+
+//global variables
 let userInput = [];
-let topInput = [];
 let lastEventTarget;
+//let topInput = [];
 
 const buttons = document.querySelectorAll("[type = 'button']")
 const display = document.querySelector('.display');
 const topDisplay = document.querySelector('.topDisplay');
 
+//add click event listener for each button
 buttons.forEach(function(button) {
     button.addEventListener('click', handleButtonPress);
 });
 
-function handleButtonPress(event) {
-    
+function handleButtonPress(event) {    
 
     if (/([0-9])/g.test(event.target.value) && lastEventTarget !== '=') {
-        //console.log(lastEventTarget);
         display.textContent = display.textContent + event.target.value;
         lastEventTarget = event.target.value;
                         
@@ -85,20 +87,19 @@ function handleButtonPress(event) {
                    
         
     }
-
+    //runs when a second operator is pressed
     else if (/([\+\-\*\/])/.test(event.target.value) && userInput.length > 1) {
         
-                
+        //runs when an operator is clicked afer already clicking an operator
+        //overwrites the last operator pressed       
         if (display.textContent === '') {
-            //console.log(userInput);
             userInput.pop();
             userInput.push(event.target.value);
             lastEventTarget = '';
-            //console.log(userInput);
-            //console.log("working");
+            
         }
+        //runs collapseArray when an operator is pressed after a non-operator
         else {
-        
             userInput.push(display.textContent);
             console.log(userInput);
             //topDisplay.textContent = topInput.join('');
@@ -127,6 +128,7 @@ function handleButtonPress(event) {
             lastEventTarget = '=';
             console.log(lastEventTarget);
         }
+        //alert if operator is pressed before equals sign
         else if (!/([0-9])/g.test(display.textContent)) {
             alert('Press a number, not an operator!');
         }
@@ -137,6 +139,7 @@ function handleButtonPress(event) {
         if (display.textContent === '') {
             display.textContent = '0.';
         }
+        //alert if trying to enter more than one decimal
         else if (display.textContent.includes('.')) {
             alert("Only 1 decimal please!")
 
@@ -146,7 +149,7 @@ function handleButtonPress(event) {
         }
         //console.log("decimal key");
     }
-
+    //delete last number entered
     else if (event.target.value === 'delete') {
         let splitDisplay = display.textContent;
         //console.log("delete button");
@@ -162,7 +165,6 @@ function handleButtonPress(event) {
         userInput = [];
         topInput = [];
         lastEventTarget = '';
-        //console.log(userInput);
         //topDisplay.textContent = '';
         display.textContent = '';    
     }

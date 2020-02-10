@@ -8,6 +8,17 @@ button:focus {
     outline: hidden;
 }
 
+body {
+    background: url("images/flameslogo.png") no-repeat right top,
+        url("images/flameslogo.png") no-repeat left top ;
+    background-color: black;
+}
+
+h1 {
+    text-align: center;
+    color: red;
+}
+
 #container {
     display: grid;
     border: 1px solid black;
@@ -17,7 +28,9 @@ button:focus {
     grid-template-rows: 100px 400px;
     grid-template-areas: 
         "display"
-        "keys";    
+        "keys";
+    margin: auto;
+
     
 }
 
@@ -30,7 +43,8 @@ button:focus {
     grid-area: display;
     border-bottom: 1px solid black;
     text-align: right;
-    
+    background-color: white;
+    border-radius: 10px;
 }
 
 .display {
@@ -63,12 +77,13 @@ button:focus {
 }
 
 .numKey {
-
+    background-color: white;
 
 }
 
 .opKey {
-    background-color: red;
+    background-color: #e4c942; 
+    font-size: 35;   
 }
 
 
@@ -142,6 +157,7 @@ button:focus {
 
 #equals {
     grid-area: equals;
+    background-color: #ec2626;
 }
 
 #decimal {
